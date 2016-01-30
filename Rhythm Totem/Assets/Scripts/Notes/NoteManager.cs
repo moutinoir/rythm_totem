@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class NoteManager : MonoBehaviour 
 {
-	private List<Note> notes = new List<Note>();
+	public List<Note> notes = new List<Note>();
 	private string[] NotesText;
 	private string[] MusicListText;
 	private char[] splitters = { ',' };
@@ -14,14 +14,11 @@ public class NoteManager : MonoBehaviour
 	{
 		LoadNotes();
 		LoadMusic();
-		CheckNotes();
 	}
 
 	/// <summary>
 	/// Loads Notes from resource file
 	/// Stores them in an array and  Cleans the array of unnessesary strings
-	/// Stores the length of the note depending on the number of "-" dashes on them
-	/// Converts string to int to set as buttontype for the note to be stored for future use
 	/// </summary>
 	void LoadNotes()
 	{
@@ -35,11 +32,6 @@ public class NoteManager : MonoBehaviour
 				charindex = NotesText[i].IndexOf(':');
 				NotesText[i] = NotesText[i].Remove(0, charindex + 1);
 			}
-			//How to use addcomponent as it is Monobehavior 
-			newnote = new Note();
-			newnote.SetLength(NotesText[i].Length);
-			notes[i].SetButtonType(System.Convert.ToInt32(NotesText[i].Substring(0, 1)));
-			notes.Add(newnote);
 //			Debug.Log(NotesText[i]);
 		}
 //		Debug.Log(NotesText.Length);
@@ -47,9 +39,7 @@ public class NoteManager : MonoBehaviour
 
 	/// <summary>
 	/// Loads Music from resource file
-	/// Stores them in an array
-	/// Cleans the array of unnessesary strings
-	/// Converts string to int to set as buttontype for the note to be stored for future use
+	/// Stores them in an array and cleans the array of unnessesary strings
 	/// </summary>
 	void LoadMusic()
 	{
@@ -63,7 +53,6 @@ public class NoteManager : MonoBehaviour
 				charindex = MusicListText[i].IndexOf(':');
 				MusicListText[i] = MusicListText[i].Remove(0, charindex + 1);
 			}
-			newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[i].Substring(0, 1)));
 //			Debug.Log(MusicListText[i]);
 		}
 //		Debug.Log(MusicListText.Length); 
@@ -72,13 +61,22 @@ public class NoteManager : MonoBehaviour
 	/// <summary>
 	/// For debugging the what the list of notes contain
 	/// </summary>
-	void CheckNotes()
+//	void CheckNotes()
+//	{
+//		foreach(Note curnote in notes)
+//		{
+//			Debug.Log("Lenght:"+curnote.GetLength());
+//			Debug.Log("Beat:"+curnote.GetBeat());
+//			Debug.Log("Button:"+curnote.GetButtonType());
+//		}
+//	}
+
+	void SetNote(int currentnoteindex, int replacementnoteindex)
 	{
-		foreach(Note curnote in notes)
-		{
-			Debug.Log("Lenght:"+curnote.GetLength());
-			Debug.Log("Beat:"+curnote.GetBeat());
-			Debug.Log("Button:"+curnote.GetButtonType());
-		}
+		newnote = new Note();
+		newnote.SetLength(NotesText[replacementnoteindex].Length);
+		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
+		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
+		notes[currentnoteindex] = newnote;
 	}
 }
