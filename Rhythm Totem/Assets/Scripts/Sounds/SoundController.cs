@@ -15,7 +15,8 @@ public class SoundController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+		//pressing ASD produces a key, and pressing them multiple times play the sound effects continously 
+		//making another instance until the soundclip is done
 		if(Input.GetKeyDown(KeyCode.A))
 			PlaySFX(0);
 		else if(Input.GetKeyDown(KeyCode.S))
