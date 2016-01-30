@@ -50,12 +50,16 @@ public class Note : MonoBehaviour {
 	private beatList beatlisttarget = beatList.dum1;
 	private buttonType buttontarget = buttonType.greenbtn;
 
+	#region Getters and Setter
+
 	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton; }
 	public buttonType GetButtonType() { return buttontarget; }
 	public void SetBeat (int beat) { beatlisttarget = (beatList)beat; }
 	public beatList GetBeat() { return beatlisttarget; }
 	public void SetLength (int beatlength) { Length = beatlength; }
 	public int GetLength() { return Length; }
+
+	#endregion
 
 	// Use this for initialization
 	void Start () {

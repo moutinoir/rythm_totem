@@ -41,6 +41,12 @@ public class SoundController : MonoBehaviour
 		//LoadSounds();
 	}
 
+	/// <summary>
+	/// Loads sounds from resource file
+	/// Stores them locally as keyvaluepair for future use
+	/// Loads Audioclip corresponding to the resource file
+	/// Stores said audioclip to masterSoundlist for future use
+	/// </summary>
 	void LoadSounds()
 	{
 		TextAsset soundlist = Resources.Load<TextAsset>("SoundList");
@@ -110,22 +116,22 @@ public class SoundController : MonoBehaviour
 		}		
 	}
 
-	void PlaySFX(int button_index)
+	void PlaySFX(int button_index)//, int soundfxindex)
 	{
 		soundSource[button_index].clip = soundList[button_index];
 		soundSource[button_index].PlayOneShot(soundList[button_index]);
-		//soundSource[button_index].clip = masterSoundList[button_index];
-		//soundSource[button_index].PlayOneShot(masterSoundList[button_index]);
+		//soundSource[button_index].clip = masterSoundList[soundfxindex];
+		//soundSource[button_index].PlayOneShot(masterSoundList[soundfxindex]);
 	}
 
-	public void PlayCorrectSound(int button_index)
+	public void PlayCorrectSound(int button_index)//, int soundfxindex)
 	{
 		PlaySFX(button_index);
 	}
 
-	public void PlayWrongSound(int button_index)
+	public void PlayWrongSound(int button_index)//, int soundfxindex)
 	{
-		StartCoroutine(PlayWrong(button_index));
+		StartCoroutine(PlayWrong(button_index));//soundfxindex);
 	}
 
 	IEnumerator PlayWrong(int button_index)
@@ -145,7 +151,6 @@ public class SoundController : MonoBehaviour
 				beatindex = beat.Key;
 			}
 		}
-
 		return beatindex;
 	}
 }
