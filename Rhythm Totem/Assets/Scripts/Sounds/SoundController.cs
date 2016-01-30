@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public class SoundController : MonoBehaviour 
@@ -7,6 +8,9 @@ public class SoundController : MonoBehaviour
 
 	public AudioSource[] soundSource; 
 	public AudioClip[] soundList;
+	private AudioClip[] masterSoundList = new AudioClip[100];
+	private string[] sfxNameListText;
+	List<KeyValuePair<int,string>> soundlistPair = new List<KeyValuePair<int,string>>();
 
 	bool leftTriggerPressed;
 	bool rightTriggerPressed;
@@ -26,14 +30,34 @@ public class SoundController : MonoBehaviour
 		soundcontroller = this;
 
 		DontDestroyOnLoad(gameObject);
+
+		//since Notemanager is being overtaken in the start sequence
+		LoadSounds();
 	}
 
 	// Use this for initialization
 	void Start () 
 	{
-	
+		//LoadSounds();
 	}
-	
+
+	void LoadSounds()
+	{
+		TextAsset soundlist = Resources.Load<TextAsset>("SoundList");
+		sfxNameListText = soundlist.ToString().Split('\n');
+		//sfxNameListText = sfxNameListText
+		for(int i = 0; i < sfxNameListText.Length; i++)
+		{
+//			Debug.Log(i + sfxNameListText[i].Substring(0, 1));
+			soundlistPair.Add(new KeyValuePair<int, string>(i, sfxNameListText[i].Substring(0, 1)));
+			sfxNameListText[i] = sfxNameListText[i].Remove(0, 2);
+			masterSoundList[i] = Resources.Load<AudioClip>("MusicList/" + sfxNameListText[i]);
+//			Debug.Log(sfxNameListText[i]);
+		}
+		Debug.Log(sfxNameListText.Length);
+
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -90,6 +114,8 @@ public class SoundController : MonoBehaviour
 	{
 		soundSource[button_index].clip = soundList[button_index];
 		soundSource[button_index].PlayOneShot(soundList[button_index]);
+		//soundSource[button_index].clip = masterSoundList[button_index];
+		//soundSource[button_index].PlayOneShot(masterSoundList[button_index]);
 	}
 
 	public void PlayCorrectSound(int button_index)
@@ -107,5 +133,19 @@ public class SoundController : MonoBehaviour
 		PlaySFX(button_index);
 		yield return new WaitForSeconds(0.3f);
 		PlaySFX(button_index);
+	}
+
+	public int GetBeatfromList(string beatID)
+	{
+		int beatindex = 0;
+		foreach(KeyValuePair<int,string> beat in soundlistPair)
+		{
+			if(beat.Value == beatID)
+			{
+				beatindex = beat.Key;
+			}
+		}
+
+		return beatindex;
 	}
 }
