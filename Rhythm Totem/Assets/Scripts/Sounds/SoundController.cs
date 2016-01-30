@@ -7,6 +7,19 @@ public class SoundController : MonoBehaviour {
 	public AudioClip[] soundList;
 
 
+	public static SoundController soundcontroller { get; private set; }
+
+	void Awake() {
+		if(soundcontroller != null && soundcontroller != this)
+		{
+			Destroy(gameObject);
+		}
+
+		soundcontroller = this;
+
+		DontDestroyOnLoad(gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 	
@@ -30,5 +43,22 @@ public class SoundController : MonoBehaviour {
 	{
 		soundSource[button_index].clip = soundList[button_index];
 		soundSource[button_index].PlayOneShot(soundList[button_index]);
+	}
+
+	public void PlayCorrectSound(int button_index)
+	{
+		PlaySFX(button_index);
+	}
+
+	public void PlayWrongSound(int button_index)
+	{
+		StartCoroutine(PlayWrong(button_index));
+	}
+
+	IEnumerator PlayWrong(int button_index)
+	{
+		PlaySFX(button_index);
+		yield return new WaitForSeconds(0.3f);
+		PlaySFX(button_index);
 	}
 }
