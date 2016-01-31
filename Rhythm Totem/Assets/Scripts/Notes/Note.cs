@@ -47,6 +47,20 @@ public enum beatList{
 
 public class Note : MonoBehaviour {
 
+	private NoteSettings noteSetting;
+
+	NoteSettings NoteSetting
+	{
+		get 
+		{
+			return noteSetting;
+		}
+		set 
+		{
+			noteSetting = value;
+		}
+	}
+
 	private int Length = 1;
 	private beatList beatlisttarget = beatList.dum1;
 	private buttonType buttontarget = buttonType.greenbtn;

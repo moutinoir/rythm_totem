@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class NoteManager : MonoBehaviour 
 {
 	public List<Note> notes = new List<Note>();
+	private List<NoteSettings> noteSettings = new List<NoteSettings> ();
 	private string[] NotesText = new string[100];
 	private string[] MusicListText = new string[100];
 	private GameObject Hitbox;
