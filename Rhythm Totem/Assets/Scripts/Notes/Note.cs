@@ -71,11 +71,8 @@ public class Note : MonoBehaviour {
 
 	#region Getters and Setter
 
-	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton;  ActivateButton(thisbutton);}
 	public buttonType GetButtonType() { return buttontarget; }
-	public void SetBeat (int beat) { beatlisttarget = (beatList)beat; }
 	public beatList GetBeat() { return beatlisttarget; }
-	public void SetLength (int beatlength) { Length = beatlength; }
 	public int GetLength() { return Length; }
 	public GameObject GetNote_gmobj() { return note_gmobj; }
 
@@ -85,7 +82,15 @@ public class Note : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		Setup();
+	}
+
+	void Setup()
+	{
+		beatlisttarget = noteSetting.Beat;
+		buttontarget = noteSetting.Button;
+		Length = noteSetting.Length;
+		ActivateButton((int) noteSetting.Button);
 	}
 	
 	// Update is called once per frame

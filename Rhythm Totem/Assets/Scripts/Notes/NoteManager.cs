@@ -90,7 +90,7 @@ public class NoteManager : MonoBehaviour
 		}
 		for(int i = 0; i < currentMusicindex; i++)
 		{
-			Debug.Log(MusicListText[i]);
+			StoreNotes(i);
 		}
 //		Debug.Log(MusicListText.Length); 
 	}
@@ -115,6 +115,14 @@ public class NoteManager : MonoBehaviour
 		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
 		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
 		notes[currentnoteindex] = newnote;
+	}
+
+	void StoreNotes(int index)
+	{
+		NoteSettings note = new NoteSettings(NotesText[index].Length,
+			(beatList)SoundController.soundcontroller.GetBeatfromList(MusicListText[index].Substring(0, 1)),
+			(buttonType)System.Convert.ToInt32(NotesText[index].Substring(0, 1)));
+		noteSettings.Add(note);
 	}
 
 	public void NoteHit()

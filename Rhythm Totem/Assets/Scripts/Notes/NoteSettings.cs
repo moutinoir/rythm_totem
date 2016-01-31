@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NoteSettings
 {
-	buttonType Button
+	public buttonType Button
 	{
 		get 
 		{
@@ -15,7 +15,7 @@ public class NoteSettings
 		}
 	}
 
-	beatList Beat
+	public beatList Beat
 	{
 		get 
 		{
@@ -27,7 +27,7 @@ public class NoteSettings
 		}
 	}
 
-	int Length
+	public int Length
 	{
 		get 
 		{
@@ -43,7 +43,7 @@ public class NoteSettings
 	private beatList beat = beatList.dum1;
 	private buttonType button = buttonType.greenbtn;
 
-	NoteSettings (int length, beatList beat, buttonType button)
+	public NoteSettings (int length, beatList beat, buttonType button)
 	{
 		Length = length;
 		Beat = beat;
