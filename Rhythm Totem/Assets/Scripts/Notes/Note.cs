@@ -2,10 +2,10 @@
 using System.Collections;
 
 public enum buttonType{
-	greenbtn,
-	redbtn,
-	yellowbtn,
-	bluebtn,
+	greenbtn = 0,
+	redbtn = 1,
+	yellowbtn = 2,
+	bluebtn = 3,
 }
 
 public enum beatList{
