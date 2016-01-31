@@ -108,14 +108,14 @@ public class NoteManager : MonoBehaviour
 //		}
 //	}
 
-	void SetNote(int currentnoteindex, int replacementnoteindex)
-	{
-		newnote = new Note();
-		newnote.SetLength(NotesText[replacementnoteindex].Length);
-		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
-		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
-		notes[currentnoteindex] = newnote;
-	}
+//	void SetNote(int currentnoteindex, int replacementnoteindex)
+//	{
+//		newnote = new Note();
+//		newnote.SetLength(NotesText[replacementnoteindex].Length);
+//		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
+//		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
+//		notes[currentnoteindex] = newnote;
+//	}
 
 	void StoreNotes(int index)
 	{

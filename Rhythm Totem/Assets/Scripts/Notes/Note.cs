@@ -45,8 +45,8 @@ public enum beatList{
 	flute8c,
 }
 
-public class Note : MonoBehaviour {
-
+public class Note : MonoBehaviour 
+{
 	private NoteSettings noteSetting;
 
 	NoteSettings NoteSetting
@@ -78,11 +78,9 @@ public class Note : MonoBehaviour {
 
 	#endregion
 
-	void ActivateButton(int boxindex) { button_gmobj[boxindex].SetActive(true); }
-
-	// Use this for initialization
-	void Start () {
-		Setup();
+	void ActivateButton(int boxindex) 
+	{ 
+		button_gmobj[boxindex].SetActive(true); 
 	}
 
 	void Setup()
@@ -92,10 +90,10 @@ public class Note : MonoBehaviour {
 		Length = noteSetting.Length;
 		ActivateButton((int) noteSetting.Button);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public float GetAngle()
+	{
+		return transform.rotation.eulerAngles.y;
 	}
 
 	void GetHit()
