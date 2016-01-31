@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 public class NoteManager : MonoBehaviour 
 {
-	private List<NoteSettings> noteSettings = new List<NoteSettings> ();
+	public List<NoteSettings> noteSettings = new List<NoteSettings> ();
+	public int currentNoteIndex = -1;
+
 	private string[] NotesText = new string[100];
 	private string[] MusicListText = new string[100];
 	private GameObject Hitbox;
@@ -127,5 +129,23 @@ public class NoteManager : MonoBehaviour
 	public void NoteHit()
 	{
 		Debug.Log("NOTE HIT!");
+	}
+
+	public NoteSettings GetNextNote ()
+	{
+		if (currentNoteIndex + 1 == noteSettings.Count) 
+		{
+			return null;
+		}
+		return noteSettings [currentNoteIndex + 1];
+	}
+
+	public NoteSettings GetCurrentNote ()
+	{
+		if (currentNoteIndex == -1) 
+		{
+			return null;
+		}
+		return noteSettings [currentNoteIndex];
 	}
 }

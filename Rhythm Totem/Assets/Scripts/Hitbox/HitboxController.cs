@@ -6,14 +6,20 @@ public class HitboxController : MonoBehaviour
 {
 	public buttonType button;
 
-	[SerializeField]
-	private NoteManager notemanager;
+	private NoteManager noteManager;
+
+	void Start()
+	{
+		noteManager = GameObject.FindWithTag("NoteManager").GetComponent<NoteManager> ();
+	}
 
 	void OnTriggerEnter(Collider note)
 	{
 		if(note.gameObject.tag == "TargetNote")
 		{
-			notemanager.NoteHit();
+			noteManager.NoteHit();
+			Note noteComponent = note.transform.parent.GetComponent<Note> ();
+			noteComponent.GetHit ();
 		}
 		else if(note.gameObject.tag == "Miss")
 		{
@@ -29,10 +35,8 @@ public class HitboxController : MonoBehaviour
 			InputDevice inputDevice = InputManager.ActiveDevice;
 			// if the pressed button is buttontype
 
-			Note noteComponent = note.gameObject.GetComponent<Note> ();
+			Note noteComponent = note.transform.parent.GetComponent<Note> ();
 			//(noteComponent.GetButtonType() == button)
-
-
 
 		}
 	}

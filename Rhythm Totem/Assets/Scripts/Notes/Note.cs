@@ -49,7 +49,7 @@ public class Note : MonoBehaviour
 {
 	private NoteSettings noteSetting;
 
-	NoteSettings NoteSetting
+	public NoteSettings NoteSetting
 	{
 		get 
 		{
@@ -58,12 +58,22 @@ public class Note : MonoBehaviour
 		set 
 		{
 			noteSetting = value;
+			Setup ();
+		}
+	}
+
+	public bool Played
+	{
+		get 
+		{
+			return played;
 		}
 	}
 
 	private int Length = 1;
 	private beatList beatlisttarget = beatList.dum1;
 	private buttonType buttontarget = buttonType.greenbtn;
+	private bool played = false;
 	[SerializeField]
 	private GameObject note_gmobj;
 	[SerializeField]
@@ -89,6 +99,7 @@ public class Note : MonoBehaviour
 		buttontarget = noteSetting.Button;
 		Length = noteSetting.Length;
 		ActivateButton((int) noteSetting.Button);
+		played = false;
 	}
 
 	public float GetAngle()
@@ -96,9 +107,9 @@ public class Note : MonoBehaviour
 		return transform.rotation.eulerAngles.y;
 	}
 
-	void GetHit()
+	public void GetHit()
 	{
-		
+		played = true;
 	}
 
 	void Miss()
