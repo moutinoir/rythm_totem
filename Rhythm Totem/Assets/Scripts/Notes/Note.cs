@@ -60,6 +60,7 @@ public class Note : MonoBehaviour {
 	public beatList GetBeat() { return beatlisttarget; }
 	public void SetLength (int beatlength) { Length = beatlength; }
 	public int GetLength() { return Length; }
+	public GameObject GetNote_gmobj() { return note_gmobj; }
 
 	#endregion
 

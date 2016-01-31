@@ -6,6 +6,8 @@ public class NoteManager : MonoBehaviour
 	public List<Note> notes = new List<Note>();
 	private string[] NotesText = new string[100];
 	private string[] MusicListText = new string[100];
+	private GameObject Hitbox;
+	private int nextnote = 0;
 
 	Note newnote = null;
 
@@ -112,5 +114,10 @@ public class NoteManager : MonoBehaviour
 		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
 		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
 		notes[currentnoteindex] = newnote;
+	}
+
+	public void NoteHit()
+	{
+		Debug.Log("NOTE HIT!");
 	}
 }
