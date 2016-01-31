@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum buttonType{
+public enum buttonType
+{
 	greenbtn = 0,
 	redbtn = 1,
 	yellowbtn = 2,
