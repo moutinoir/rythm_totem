@@ -4,9 +4,8 @@ using System.Collections.Generic;
 public class NoteManager : MonoBehaviour 
 {
 	public List<Note> notes = new List<Note>();
-	private string[] NotesText;
-	private string[] MusicListText;
-	private char[] splitters = { ',' };
+	private string[] NotesText = new string[100];
+	private string[] MusicListText = new string[100];
 
 	Note newnote = null;
 
@@ -23,16 +22,40 @@ public class NoteManager : MonoBehaviour
 	void LoadNotes()
 	{
 		int charindex = 0;
+		int currentinsertindex = 0;
+		int currentNotesindex = 0;
+		char[] tempCharArray;
 		TextAsset notesList = Resources.Load<TextAsset>("Levels_Notes/Notes_Level1");
-		NotesText = notesList.ToString().Split(splitters,System.StringSplitOptions.RemoveEmptyEntries);
-		for(int i = 0; i < NotesText.Length - 1; i++)
+		tempCharArray = notesList.ToString().ToCharArray();
+		//NotesText = notesList.ToString().Split(splitters,System.StringSplitOptions.RemoveEmptyEntries);
+		for(int i = 0; i < tempCharArray.Length; i++)
 		{
-			if(NotesText[i].Contains(":"))
+			if(tempCharArray[i].CompareTo('-') == 0)
 			{
-				charindex = NotesText[i].IndexOf(':');
-				NotesText[i] = NotesText[i].Remove(0, charindex + 1);
+				NotesText[currentNotesindex - 1]+= "-";
+//				Debug.Log("dash HERE");
 			}
-//			Debug.Log(NotesText[i]);
+			else if(tempCharArray[i].CompareTo('\n') == 0)
+			{
+//				Debug.Log("space HERE");
+			}
+			else if((int)tempCharArray[i] == 13)
+			{
+//				Debug.Log("blank HERE");
+			}
+			else
+			{
+				charindex = i;
+				currentinsertindex = 0;
+				NotesText[currentNotesindex] = tempCharArray[i].ToString();
+				currentNotesindex++;
+//				Debug.Log("letter/number HERE");
+			}
+			//Debug.Log(NotesText[i]);
+		}
+		for(int i = 0; i < currentNotesindex; i++)
+		{
+			Debug.Log(NotesText[i]);
 		}
 //		Debug.Log(NotesText.Length);
 	}
@@ -44,16 +67,27 @@ public class NoteManager : MonoBehaviour
 	void LoadMusic()
 	{
 		int charindex = 0;
+		int currentMusicindex = 0;
+		char[] tempCharArray;
 		TextAsset musicList = Resources.Load<TextAsset>("Levels_Music/Music_Level1");
-		MusicListText = musicList.ToString().Split(splitters,System.StringSplitOptions.RemoveEmptyEntries);
-		for(int i = 0; i < MusicListText.Length - 1; i++)
+		tempCharArray = musicList.ToString().ToCharArray();
+		for(int i = 0; i < tempCharArray.Length; i++)
 		{
-			if(MusicListText[i].Contains(":"))
+			if(tempCharArray[i].CompareTo('-') == 0) { }
+			else if(tempCharArray[i].CompareTo('\n') == 0) { }
+			else if((int)tempCharArray[i] == 13) { }
+			else
 			{
-				charindex = MusicListText[i].IndexOf(':');
-				MusicListText[i] = MusicListText[i].Remove(0, charindex + 1);
+				charindex = i;
+				MusicListText[currentMusicindex] = tempCharArray[i].ToString();
+				currentMusicindex++;
+				//				Debug.Log("letter/number HERE");
 			}
-//			Debug.Log(MusicListText[i]);
+			//Debug.Log(NotesText[i]);
+		}
+		for(int i = 0; i < currentMusicindex; i++)
+		{
+			Debug.Log(MusicListText[i]);
 		}
 //		Debug.Log(MusicListText.Length); 
 	}

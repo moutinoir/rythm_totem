@@ -49,10 +49,12 @@ public class Note : MonoBehaviour {
 	private int Length = 1;
 	private beatList beatlisttarget = beatList.dum1;
 	private buttonType buttontarget = buttonType.greenbtn;
+	[SerializeField]
+	private GameObject note_gmobj;
 
 	#region Getters and Setter
 
-	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton; }
+	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton;  ChangeButtonColor();}
 	public buttonType GetButtonType() { return buttontarget; }
 	public void SetBeat (int beat) { beatlisttarget = (beatList)beat; }
 	public beatList GetBeat() { return beatlisttarget; }
@@ -60,6 +62,11 @@ public class Note : MonoBehaviour {
 	public int GetLength() { return Length; }
 
 	#endregion
+
+	void ChangeButtonColor()
+	{
+		//
+	}
 
 	// Use this for initialization
 	void Start () {
