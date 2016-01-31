@@ -51,10 +51,12 @@ public class Note : MonoBehaviour {
 	private buttonType buttontarget = buttonType.greenbtn;
 	[SerializeField]
 	private GameObject note_gmobj;
+	[SerializeField]
+	private GameObject[] button_gmobj;
 
 	#region Getters and Setter
 
-	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton;  ChangeButtonColor();}
+	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton;  ActivateButton(thisbutton);}
 	public buttonType GetButtonType() { return buttontarget; }
 	public void SetBeat (int beat) { beatlisttarget = (beatList)beat; }
 	public beatList GetBeat() { return beatlisttarget; }
@@ -64,10 +66,7 @@ public class Note : MonoBehaviour {
 
 	#endregion
 
-	void ChangeButtonColor()
-	{
-		//
-	}
+	void ActivateButton(int boxindex) { button_gmobj[boxindex].SetActive(true); }
 
 	// Use this for initialization
 	void Start () {
