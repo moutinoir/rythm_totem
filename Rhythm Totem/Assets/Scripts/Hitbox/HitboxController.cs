@@ -16,6 +16,6 @@ public class HitboxController : MonoBehaviour {
 		{
 			Debug.Log("Miss!!!!");
 		}
-		gameObject.transform.position += new Vector3(0, 3);
+		gameObject.SetActive(false);
 	}
 }
