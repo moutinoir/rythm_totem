@@ -90,6 +90,9 @@ public class Note : MonoBehaviour
 
 	void ActivateButton(int boxindex) 
 	{ 
+		foreach (GameObject obj in button_gmobj) {
+			obj.SetActive (false);
+		}
 		button_gmobj[boxindex].SetActive(true); 
 	}
 
@@ -110,6 +113,7 @@ public class Note : MonoBehaviour
 	public void GetHit()
 	{
 		played = true;
+		SoundController.soundcontroller.PlayCorrectSound ((int)buttontarget, (int)beatlisttarget);
 	}
 
 	void Miss()

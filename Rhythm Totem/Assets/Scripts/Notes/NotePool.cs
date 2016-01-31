@@ -29,9 +29,15 @@ public class NotePool : MonoBehaviour
 
 	private Note note;
 	private Note currentNote;
+	private float wait = 0.0f;
+	public float waitTime = 5.0f;
 
 	void Update()
 	{
+		wait += Time.deltaTime;
+		if (wait < waitTime) {
+			return;
+		}
 		// hide notes
 		float currentAngle = GetCurrentAngle ();
 		float disappearLimitBegin = currentAngle - behindPoleBegin;
@@ -100,6 +106,7 @@ public class NotePool : MonoBehaviour
 		note.gameObject.SetActive (true);
 		Notes.Add (note);
 		AvailableNotes.RemoveAt (0);
+		noteManager.currentNoteIndex++;
 		return note;
 	}
 }

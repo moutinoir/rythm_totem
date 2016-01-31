@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public enum Pressedbutton{
@@ -11,6 +11,8 @@ public enum Pressedbutton{
 }
 
 public class ControllerManager : MonoBehaviour {
+
+	public List<HitboxController> hitboxes;
 
 	public static ControllerManager controllermanager { get; private set; }
 
@@ -77,6 +79,11 @@ public class ControllerManager : MonoBehaviour {
 		{
 			currentPressedbutton = Pressedbutton.invalid;
 		}
+
+		hitboxes [0].gameObject.SetActive (leftTriggerPressed);
+		hitboxes [1].gameObject.SetActive (leftBumperPressed);
+		hitboxes [2].gameObject.SetActive (rightBumperPressed);
+		hitboxes [3].gameObject.SetActive (rightTriggerPressed);
 
 		//Debug.Log(currentPressedbutton);
 	}
