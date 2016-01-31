@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class NoteManager : MonoBehaviour 
 {
-	public List<Note> notes = new List<Note>();
+	private List<NoteSettings> noteSettings = new List<NoteSettings> ();
 	private string[] NotesText = new string[100];
 	private string[] MusicListText = new string[100];
 	private GameObject Hitbox;
@@ -89,7 +89,7 @@ public class NoteManager : MonoBehaviour
 		}
 		for(int i = 0; i < currentMusicindex; i++)
 		{
-			Debug.Log(MusicListText[i]);
+			StoreNotes(i);
 		}
 //		Debug.Log(MusicListText.Length); 
 	}
@@ -107,13 +107,21 @@ public class NoteManager : MonoBehaviour
 //		}
 //	}
 
-	void SetNote(int currentnoteindex, int replacementnoteindex)
+//	void SetNote(int currentnoteindex, int replacementnoteindex)
+//	{
+//		newnote = new Note();
+//		newnote.SetLength(NotesText[replacementnoteindex].Length);
+//		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
+//		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
+//		notes[currentnoteindex] = newnote;
+//	}
+
+	void StoreNotes(int index)
 	{
-		newnote = new Note();
-		newnote.SetLength(NotesText[replacementnoteindex].Length);
-		newnote.SetButtonType(System.Convert.ToInt32(NotesText[replacementnoteindex].Substring(0, 1)));
-		newnote.SetBeat(SoundController.soundcontroller.GetBeatfromList(MusicListText[replacementnoteindex].Substring(0, 1)));
-		notes[currentnoteindex] = newnote;
+		NoteSettings note = new NoteSettings(NotesText[index].Length,
+			(beatList)SoundController.soundcontroller.GetBeatfromList(MusicListText[index].Substring(0, 1)),
+			(buttonType)System.Convert.ToInt32(NotesText[index].Substring(0, 1)));
+		noteSettings.Add(note);
 	}
 
 	public void NoteHit()

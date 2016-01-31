@@ -45,7 +45,21 @@ public enum beatList{
 	flute8c,
 }
 
-public class Note : MonoBehaviour {
+public class Note : MonoBehaviour 
+{
+	private NoteSettings noteSetting;
+
+	NoteSettings NoteSetting
+	{
+		get 
+		{
+			return noteSetting;
+		}
+		set 
+		{
+			noteSetting = value;
+		}
+	}
 
 	private int Length = 1;
 	private beatList beatlisttarget = beatList.dum1;
@@ -57,26 +71,29 @@ public class Note : MonoBehaviour {
 
 	#region Getters and Setter
 
-	public void SetButtonType (int thisbutton) { buttontarget = (buttonType)thisbutton;  ActivateButton(thisbutton);}
 	public buttonType GetButtonType() { return buttontarget; }
-	public void SetBeat (int beat) { beatlisttarget = (beatList)beat; }
 	public beatList GetBeat() { return beatlisttarget; }
-	public void SetLength (int beatlength) { Length = beatlength; }
 	public int GetLength() { return Length; }
 	public GameObject GetNote_gmobj() { return note_gmobj; }
 
 	#endregion
 
-	void ActivateButton(int boxindex) { button_gmobj[boxindex].SetActive(true); }
-
-	// Use this for initialization
-	void Start () {
-	
+	void ActivateButton(int boxindex) 
+	{ 
+		button_gmobj[boxindex].SetActive(true); 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Setup()
+	{
+		beatlisttarget = noteSetting.Beat;
+		buttontarget = noteSetting.Button;
+		Length = noteSetting.Length;
+		ActivateButton((int) noteSetting.Button);
+	}
+
+	public float GetAngle()
+	{
+		return transform.rotation.eulerAngles.y;
 	}
 
 	void GetHit()
