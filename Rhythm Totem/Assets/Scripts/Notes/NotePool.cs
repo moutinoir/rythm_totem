@@ -34,6 +34,9 @@ public class NotePool : MonoBehaviour
 
 	void Update()
 	{
+		if (restart && Notes.Count == 0) {
+			
+		}
 		wait += Time.deltaTime;
 		if (wait < waitTime) {
 			return;
@@ -89,11 +92,11 @@ public class NotePool : MonoBehaviour
 			currentNote = CreateNote (noteManager.GetNextNote (), currentAngle + creationAngle);
 		}
 	}
-
+	bool restart = false;
 	Note CreateNote(NoteSettings settings, float angle)
 	{
 		if (settings == null)
-			return null;
+			restart = true;
 		note = AvailableNotes [0];
 		note.NoteSetting = settings;
 

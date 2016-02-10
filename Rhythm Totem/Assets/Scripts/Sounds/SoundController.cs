@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using InControl;
+using System;
+
 
 public class SoundController : MonoBehaviour 
 {
@@ -39,6 +42,9 @@ public class SoundController : MonoBehaviour
 	void Start () 
 	{
 		//LoadSounds();
+		var classType = Type.GetType( "KeyboardMouseProfilebis" );
+		var customProfileInstance = Activator.CreateInstance( classType ) as UnityInputDeviceProfile;
+		InputManager.AttachDevice( new UnityInputDevice( customProfileInstance ) );
 	}
 
 	/// <summary>

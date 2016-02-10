@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
+using System.Collections;
+using System.Reflection;
 
 public class NoteManager : MonoBehaviour 
 {
@@ -17,6 +20,7 @@ public class NoteManager : MonoBehaviour
 	{
 		LoadNotes();
 		LoadMusic();
+
 	}
 
 	/// <summary>

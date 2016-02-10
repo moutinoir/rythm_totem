@@ -116,8 +116,9 @@ public class Note : MonoBehaviour
 		SoundController.soundcontroller.PlayCorrectSound ((int)buttontarget, (int)beatlisttarget);
 	}
 
-	void Miss()
+	public void Miss()
 	{
-		
+		played = true;
+		Debug.Log ("Miss");
 	}
 }

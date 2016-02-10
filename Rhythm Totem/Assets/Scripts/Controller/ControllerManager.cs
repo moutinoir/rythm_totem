@@ -12,7 +12,7 @@ public enum Pressedbutton{
 
 public class ControllerManager : MonoBehaviour {
 
-	public List<HitboxController> hitboxes;
+	public List<NoteHitDetector> hitboxes;
 
 	public static ControllerManager controllermanager { get; private set; }
 
@@ -35,8 +35,30 @@ public class ControllerManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
+	void DebugControls()
+	{
+		InputDevice inputDevice = InputManager.ActiveDevice;
+		if (inputDevice.LeftTrigger.IsPressed) 
+		{
+			Debug.Log ("leftTriggerPressed");
+		}
+		if(inputDevice.LeftBumper.IsPressed)
+		{
+			Debug.Log ("leftBumperPressed");
+		}
+		if(inputDevice.RightBumper.IsPressed)
+		{
+			Debug.Log ("rightBumperPressed");
+		}
+		if(inputDevice.RightTrigger.IsPressed)
+		{
+			Debug.Log ("rightTriggerPressed");
+		}
+	}
+
 	void Update()
 	{
+		DebugControls ();
 		InputDevice inputDevice = InputManager.ActiveDevice;
 		if (!inputDevice.LeftTrigger.IsPressed) 
 		{
